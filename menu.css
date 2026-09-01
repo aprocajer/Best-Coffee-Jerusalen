@@ -23,6 +23,7 @@ footer {
     transform: scale(1.15);
 }
 
+
 /* Responsivo para menú móvil */
 @media (max-width: 768px) {
     .menu-toggle {
@@ -35,13 +36,14 @@ footer {
         top: 100%;
         left: 0;
         width: 100%;
-        background-color: var(--primary-color);
+        background-color: #4A2C2A; 
         flex-direction: column;
         padding: 1rem 0;
         text-align: center;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.2);
     }
 
     .menu-links.active {
-        display: flex;
+        display: flex !important;
     }
 }
