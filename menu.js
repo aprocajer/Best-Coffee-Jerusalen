@@ -3,12 +3,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const menuLinks = document.getElementById("menu-links");
 
     if (menuToggle && menuLinks) {
-        // Alternar el menú desplegable al hacer clic en el botón
+        // Al hacer clic en el botón de tres líneas (≡)
         menuToggle.addEventListener("click", () => {
             menuLinks.classList.toggle("active");
         });
 
-        // Cerrar el menú automáticamente al hacer clic en cualquier enlace
+        // Ocultar el menú automáticamente al hacer clic en un enlace
         const links = menuLinks.querySelectorAll("a");
         links.forEach(link => {
             link.addEventListener("click", () => {
