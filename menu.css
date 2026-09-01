@@ -1,0 +1,47 @@
+footer {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    text-align: center;
+    padding: 2rem 1rem 1rem;
+    margin-top: 3rem;
+}
+
+.redes-sociales {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    margin: 1rem 0;
+}
+
+.redes-sociales img {
+    filter: brightness(0) invert(1);
+    transition: transform 0.2s;
+}
+
+.redes-sociales img:hover {
+    transform: scale(1.15);
+}
+
+/* Responsivo para menú móvil */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .menu-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: var(--primary-color);
+        flex-direction: column;
+        padding: 1rem 0;
+        text-align: center;
+    }
+
+    .menu-links.active {
+        display: flex;
+    }
+}
