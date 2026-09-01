@@ -28,18 +28,27 @@ h2::after {
     transform: translateX(-50%);
 }
 
-/* Sección Bienvenida / Hero */
+/* Agrega las variables al inicio del archivo si no están importadas de menu.css */
+:root {
+    --text-light: #ffffff;
+    --text-dark: #2B1E1A;
+}
+
+/* O fuerza los textos en blanco dentro de la sección bienvenida */
 .bienvenida {
     text-align: center;
-    background: linear-gradient(rgba(74, 44, 42, 0.7), rgba(74, 44, 42, 0.7)), url('procesos.jpg') center/cover no-repeat;
-    color: var(--text-light);
+    background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('../assets/procesos.jpg') center/cover no-repeat;
+    color: #ffffff;
     padding: 5rem 1rem;
     border-radius: 8px;
     margin-top: 1rem;
 }
 
+/* Sección Bienvenida / Hero */
+
+
 .bienvenida h1 {
-    color: var(--text-light);
+    color: #ffffff !important;
     font-size: 2.5rem;
 }
 
