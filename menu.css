@@ -127,9 +127,8 @@ footer {
     gap: 1.5rem;
     margin: 1rem 0;
 }
-
 .redes-sociales img {
-    filter: brightness(0) invert(1);
+    /* filter: brightness(0) invert(1); <-- Elimina esta línea */
     transition: transform 0.2s;
 }
 
