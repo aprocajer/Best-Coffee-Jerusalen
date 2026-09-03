@@ -39,7 +39,7 @@ header {
 
 /* Control del Logo */
 .img-nav-logo {
-    height: 55px; /* Altura fija adecuada para PC */
+    height: 65px; /* Altura fija adecuada para PC */
     width: auto;
     display: block;
 }
