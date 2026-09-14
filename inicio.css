@@ -137,42 +137,34 @@ h2::after {
     object-fit: cover;
     border-radius: 6px;
 }
-/* Contenedor Principal */
-.contacto-ubicacion-seccion {
+/* Contenedor principal para centrar la sección */
+.seccion-contacto-ubicacion {
     width: 100%;
-    max-width: 1200px; /* Ancho máximo para ocupar la pantalla sin esparcirse demasiado */
+    max-width: 1200px;
     margin: 3rem auto;
     padding: 0 1.5rem;
     box-sizing: border-box;
 }
 
-/* Flexbox para poner Formulario a la Izquierda y Mapa a la Derecha */
-.contacto-ubicacion-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2.5rem; /* Espacio entre el formulario y el mapa */
-    justify-content: center;
-    align-items: flex-start;
+/* Rejilla de 2 columnas */
+.contenedor-dos-columnas {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 50% para el formulario, 50% para el mapa */
+    gap: 2.5rem; /* Espacio horizontal entre las dos columnas */
+    align-items: start;
 }
 
-/* Ambas columnas toman el 50% del espacio en pantallas anchas */
-.columna-contacto,
-.columna-ubicacion {
-    flex: 1 1 450px; /* Si hay más de 450px por columna, se ponen a la par */
-    width: 100%;
-}
-
-/* Títulos y Líneas */
-.columna-contacto h2,
-.columna-ubicacion h2 {
+/* Títulos y líneas decorativas */
+.columna-bloque h2 {
     color: #a67c37;
     text-align: center;
     font-size: 2rem;
+    margin-top: 0;
     margin-bottom: 0.3rem;
 }
 
 .linea-decorativa {
-    width: 50px;
+    width: 60px;
     height: 4px;
     background-color: #a67c37;
     margin: 0 auto 1.5rem auto;
@@ -183,7 +175,7 @@ h2::after {
 #form-contacto {
     display: flex;
     flex-direction: column;
-    gap: 0.9rem;
+    gap: 1rem;
 }
 
 #form-contacto input,
@@ -194,6 +186,7 @@ h2::after {
     border-radius: 6px;
     font-size: 1rem;
     box-sizing: border-box;
+    font-family: inherit;
 }
 
 #form-contacto button {
@@ -205,25 +198,33 @@ h2::after {
     font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: background-color 0.2s ease;
 }
 
 #form-contacto button:hover {
     background-color: #8b5a2b;
 }
 
-/* Ajuste Responsivo para tu contenedor .mapa */
+/* Ajustes del Mapa e Iframe */
 .mapa {
     width: 100%;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* Para que el iframe ocupe todo el ancho del contenedor sin desbordarse */
 .mapa iframe {
     width: 100% !important;
-    max-width: 100%;
+    height: 380px !important; /* Altura para igualar visualmente el tamaño del formulario */
+    border: 0;
     border-radius: 8px;
+}
+
+/* ADAPTACIÓN PARA TELÉFONOS / PANTALLAS PEQUEÑAS */
+@media (max-width: 850px) {
+    .contenedor-dos-columnas {
+        grid-template-columns: 1fr; /* Pasa automáticamente a 1 columna en celulares */
+        gap: 3rem;
+    }
 }
 /* Seccion Principal de Contacto y Ubicacion */
