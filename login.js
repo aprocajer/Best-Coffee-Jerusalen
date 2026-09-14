@@ -6,10 +6,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnSubmit = document.getElementById("btn-login-submit");
     const mensajeLogin = document.getElementById("mensaje-login");
 
-    // URL de tu script de autenticación (lo configuraremos en el backend)
+    // URL de tu script de autenticación en Google Apps Script
     const AUTH_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxT0EyjrXmxxl0SLDli35zK4Gpy4vuGkG8C-c2uYCCebV5OvA3zlg00XBWL_d02P80P/exec";
 
-    // Abrir modal
+    // 1. Verificar si ya hay una sesión activa al cargar la página
+    const usuarioGuardado = JSON.parse(localStorage.getItem("usuario_aprocajer"));
+    if (usuarioGuardado) {
+        mostrarMenuUsuario(usuarioGuardado);
+    }
+
+    // 2. Abrir modal al hacer clic en "Iniciar Sesión"
     if (btnLogin && modalLogin) {
         btnLogin.addEventListener("click", (e) => {
             e.preventDefault();
@@ -17,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Cerrar modal al hacer clic en la X
+    // 3. Cerrar modal al hacer clic en la X
     if (cerrarLogin) {
         cerrarLogin.addEventListener("click", () => {
             modalLogin.style.display = "none";
@@ -25,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Cerrar modal si hace clic fuera del contenido
+    // 4. Cerrar modal si se hace clic fuera del contenido
     window.addEventListener("click", (e) => {
         if (e.target === modalLogin) {
             modalLogin.style.display = "none";
@@ -33,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Procesar Inicio de Sesión
+    // 5. Procesar Inicio de Sesión
     if (formLogin) {
         formLogin.addEventListener("submit", (e) => {
             e.preventDefault();
@@ -53,19 +59,24 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (data.status === "success") {
                     mensajeLogin.style.color = "green";
                     mensajeLogin.textContent = `¡Bienvenido, ${data.nombre}!`;
-                    
-                    // Guardar sesión en el navegador (localStorage)
+
+                    // Guardar sesión en el navegador
                     localStorage.setItem("usuario_aprocajer", JSON.stringify(data));
 
+                    // Actualizar el menú de navegación con el perfil del usuario
+                    mostrarMenuUsuario(data);
+
+                    // Ocultar modal y redirigir
                     setTimeout(() => {
                         modalLogin.style.display = "none";
                         formLogin.reset();
                         btnSubmit.textContent = "Ingresar";
                         btnSubmit.disabled = false;
-                        
-                        // Redirigir o actualizar interfaz
-                        alert(`Sesión iniciada con exito como ${data.nombre}`);
-                    }, 1200);
+
+                        // REDIRIGIR AL PORTAL EXCLUSIVO (Ajusta la ruta si es necesario)
+                        window.location.href = "portal.html";
+                    }, 1000);
+
                 } else {
                     mensajeLogin.style.color = "red";
                     mensajeLogin.textContent = data.message || "Credenciales incorrectas.";
@@ -82,33 +93,29 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     }
+
+    // 6. Manejo de Cierre de Sesión (Logout)
+    document.addEventListener("click", (e) => {
+        if (e.target && e.target.id === "btn-logout") {
+            localStorage.removeItem("usuario_aprocajer");
+            window.location.href = "index.html"; // Redirigir al inicio o recargar
+        }
+    });
 });
 
-// Dentro de la respuesta exitosa del login:
-if (data.status === "success") {
-    // 1. Ocultar el botón de login
-    document.querySelector('.btn-login').style.display = 'none';
-    
-    // 2. Mostrar un saludo o botón de perfil
-    const contenedorMenu = document.querySelector('.nav-links'); // O el selector de tu menú
-    contenedorMenu.insertAdjacentHTML('beforeend', `
-        <div class="user-profile-menu">
-            <span>Bienvenido, <strong>${data.nombre}</strong></span>
-            <a href="portal.html" class="btn-portal">Ir a mi Portal</a>
-            <button id="btn-logout" class="btn-logout">Cerrar Sesión</button>
-        </div>
-    `);
-}
+// Función para reemplazar el botón de login por la información del usuario
+function mostrarMenuUsuario(usuario) {
+    const btnLogin = document.querySelector(".btn-login");
+    if (btnLogin) btnLogin.style.display = "none";
 
-//dirigir a pag exclusiva
-setTimeout(() => {
-    window.location.href = "portal.html";
-}, 1000);
-
-//cerrar sesion
-document.addEventListener('click', (e) => {
-    if (e.target && e.target.id === 'btn-logout') {
-        localStorage.removeItem('usuario_aprocajer');
-        window.location.reload(); // Recargar la página
+    const contenedorMenu = document.querySelector(".nav-links");
+    if (contenedorMenu && !document.getElementById("btn-logout")) {
+        contenedorMenu.insertAdjacentHTML("beforeend", `
+            <div class="user-profile-menu">
+                <span>Bienvenido, <strong>${usuario.nombre}</strong></span>
+                <a href="portal.html" class="btn-portal">Ir a mi Portal</a>
+                <button id="btn-logout" class="btn-logout">Cerrar Sesión</button>
+            </div>
+        `);
     }
-});
+}
