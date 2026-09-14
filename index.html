@@ -105,26 +105,40 @@
             </div>
         </section>
 
-        <section class="contacto">
-        <h2>Contacto</h2>
-        <!-- Agregamos id="form-contacto" -->
-        <form id="form-contacto">
-            <input type="text" name="nombre" placeholder="Nombre" required>
-            <input type="tel" name="telefono" placeholder="Telefono" required>
-            <input type="email" name="email" placeholder="Correo Electrónico" required>
-            <textarea name="mensaje" placeholder="Mensaje" required></textarea>
-            <button type="submit" id="btn-enviar">Enviar</button>
-        </form>
-            
-        <div id="mensaje-respuesta" style="margin-top: 10px; text-align: center;"></div>
-        </section>
-
-        <section class="Ubicacion">
-            <h2>Ubicación</h2>
-            <div class="mapa">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d883.5419959433916!2d-88.2391694676756!3d15.14013322797453!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1ses!2shn!4v1784916876246!5m2!1ses!2shn" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        <section class="seccion-contacto-ubicacion">
+        <div class="contacto-grid-container">
+        
+            <!-- Columna Izquierda: Formulario de Contacto -->
+            <div class="columna-contacto">
+                <h2>Contacto</h2>
+                <div class="linea-decorativa"></div>
+                    <form id="form-contacto">
+                        <input type="text" name="nombre" placeholder="Nombre" required>
+                        <input type="tel" name="telefono" placeholder="Teléfono" required>
+                        <input type="email" name="email" placeholder="Correo Electrónico" required>
+                        <textarea name="mensaje" placeholder="Mensaje" rows="4" required></textarea>
+                        <button type="submit" id="btn-enviar">Enviar</button>
+                    </form>
+                    <div id="mensaje-respuesta"></div>
+                </div>
+                    <!-- Columna Derecha: Ubicación / Mapa -->
+                <div class="columna-ubicacion">
+                    <h2>Ubicación</h2>
+                <div class="linea-decorativa"></div> 
+            <!-- Aquí colocas tu mapa iframe o la información de la ubicación -->
+            <div class="mapa-contenedor">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=..." 
+                    width="100%" 
+                    height="100%" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy">
+                </iframe>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
     </main>
     <footer>
         <section class="Siguenos">
