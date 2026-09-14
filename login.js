@@ -83,3 +83,32 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+
+// Dentro de la respuesta exitosa del login:
+if (data.status === "success") {
+    // 1. Ocultar el botón de login
+    document.querySelector('.btn-login').style.display = 'none';
+    
+    // 2. Mostrar un saludo o botón de perfil
+    const contenedorMenu = document.querySelector('.nav-links'); // O el selector de tu menú
+    contenedorMenu.insertAdjacentHTML('beforeend', `
+        <div class="user-profile-menu">
+            <span>Bienvenido, <strong>${data.nombre}</strong></span>
+            <a href="portal.html" class="btn-portal">Ir a mi Portal</a>
+            <button id="btn-logout" class="btn-logout">Cerrar Sesión</button>
+        </div>
+    `);
+}
+
+//dirigir a pag exclusiva
+setTimeout(() => {
+    window.location.href = "portal.html";
+}, 1000);
+
+//cerrar sesion
+document.addEventListener('click', (e) => {
+    if (e.target && e.target.id === 'btn-logout') {
+        localStorage.removeItem('usuario_aprocajer');
+        window.location.reload(); // Recargar la página
+    }
+});
