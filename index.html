@@ -141,10 +141,13 @@
     <script src="menu.js"></script>
     <script src="contacto.js"></script>
     <!-- Modal de Iniciar Sesión -->
+    <!-- Modal de Iniciar Sesión -->
     <div id="modal-login" class="modal-login">
         <div class="contenido-modal">
             <span class="cerrar-modal" id="cerrar-login">&times;</span>
             <h2>Iniciar Sesión</h2>
+            <p class="subtitulo-modal">Acceso para productores y personal técnico</p>
+        
             <form id="form-login">
                 <div class="campo">
                     <label for="login-email">Correo Electrónico</label>
@@ -154,9 +157,9 @@
                     <label for="login-password">Contraseña</label>
                     <input type="password" id="login-password" name="password" placeholder="••••••••" required>
                 </div>
-                <button type="submit" class="btn-submit">Ingresar</button>
-            </form>
-            <div id="mensaje-login"></div>
+                <button type="submit" class="btn-submit" id="btn-login-submit">Ingresar</button>
+             </form>
+            <div id="mensaje-login" class="mensaje-login"></div>
         </div>
     </div>
 </body>
