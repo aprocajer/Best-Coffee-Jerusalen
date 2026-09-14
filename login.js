@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const mensajeLogin = document.getElementById("mensaje-login");
 
     // URL de tu script de autenticación (lo configuraremos en el backend)
-    const AUTH_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxcVvZajOTn8u2SbpLuN5y9-OaaBYNQfL4eEIR0VcGY-iVrsICueYBDL3kdUtohWMtx/exec";
+    const AUTH_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxT0EyjrXmxxl0SLDli35zK4Gpy4vuGkG8C-c2uYCCebV5OvA3zlg00XBWL_d02P80P/exec";
 
     // Abrir modal
     if (btnLogin && modalLogin) {
