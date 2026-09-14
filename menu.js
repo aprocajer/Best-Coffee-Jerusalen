@@ -17,3 +17,32 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+
+
+//Para el login
+document.addEventListener("DOMContentLoaded", () => {
+    const btnLogin = document.querySelector(".btn-login");
+    const modalLogin = document.getElementById("modal-login");
+    const cerrarLogin = document.getElementById("cerrar-login");
+
+    // Abrir modal
+    if (btnLogin && modalLogin) {
+        btnLogin.addEventListener("click", () => {
+            modalLogin.style.display = "flex";
+        });
+    }
+
+    // Cerrar modal al hacer clic en la X
+    if (cerrarLogin) {
+        cerrarLogin.addEventListener("click", () => {
+            modalLogin.style.display = "none";
+        });
+    }
+
+    // Cerrar modal al hacer clic fuera del cuadro
+    window.addEventListener("click", (e) => {
+        if (e.target === modalLogin) {
+            modalLogin.style.display = "none";
+        }
+    });
+});
