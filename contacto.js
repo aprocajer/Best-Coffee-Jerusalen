@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const mensajeRespuesta = document.getElementById("mensaje-respuesta");
 
     // REEMPLAZA ESTA URL CON LA QUE TE DIO GOOGLE APPS SCRIPT
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwC3PYycqKOI7PuadBNBjeGvW2Fq_tWAiJpLi_YzovO4dKQmDX-S-YLkVAXoU4QdIbn/exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyrpCteFayBAVi7dwqBcRc5N61KBQjG9fQrlcPepTycnpfm_FCKxvLCjrnEMfWCxgAj/exec";
 
     if (formContacto) {
         formContacto.addEventListener("submit", (e) => {
