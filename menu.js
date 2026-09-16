@@ -49,35 +49,91 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Carrusel interactivo de certificaciones de aprocajer
 document.addEventListener("DOMContentLoaded", () => {
-    const slider = document.querySelector(".carrusel-container");
-    if (!slider) return;
+    const container = document.getElementById("carrusel-certificaciones");
+    const track = document.getElementById("carrusel-track");
 
+    if (!container || !track) return;
+
+    // 1. Duplicar elementos para simular la cinta infinita
+    const itemsOriginales = Array.from(track.children);
+    for (let i = 0; i < 6; i++) {
+        itemsOriginales.forEach(item => {
+            track.appendChild(item.cloneNode(true));
+        });
+    }
+
+    // Centrar la posición inicial del scroll
+    let anchoUnidad = track.scrollWidth / 7;
+    container.scrollLeft = anchoUnidad * 3;
+
+    // 2. Desplazamiento Automático Continuo
+    let autoScrollSpeed = 1; // Velocidad del movimiento (ajusta si quieres más rápido/lento)
+    let isInteracting = false;
+
+    function autoMove() {
+        if (!isInteracting) {
+            container.scrollLeft += autoScrollSpeed;
+            verificarResetLoop();
+        }
+        requestAnimationFrame(autoMove);
+    }
+    requestAnimationFrame(autoMove);
+
+    // 3. Reajuste Inaudible para evitar topes (Loop Infinito real)
+    function verificarResetLoop() {
+        const maxScroll = container.scrollWidth - container.clientWidth;
+        if (container.scrollLeft <= 10) {
+            container.scrollLeft = anchoUnidad * 3;
+        } else if (container.scrollLeft >= maxScroll - 10) {
+            container.scrollLeft = anchoUnidad * 3;
+        }
+    }
+
+    // 4. Arrastre Manual (Ratón / Mouse)
     let isDown = false;
     let startX;
-    let scrollLeft;
+    let scrollLeftPos;
 
-    slider.addEventListener("mousedown", (e) => {
+    container.addEventListener("mousedown", (e) => {
         isDown = true;
-        slider.classList.add("dragging");
-        startX = e.pageX - slider.offsetLeft;
-        scrollLeft = slider.scrollLeft;
+        isInteracting = true;
+        startX = e.pageX - container.offsetLeft;
+        scrollLeftPos = container.scrollLeft;
     });
 
-    slider.addEventListener("mouseleave", () => {
-        isDown = false;
-        slider.classList.remove("dragging");
+    window.addEventListener("mouseup", () => {
+        if (isDown) {
+            isDown = false;
+            setTimeout(() => { isInteracting = false; }, 1000);
+        }
     });
 
-    slider.addEventListener("mouseup", () => {
-        isDown = false;
-        slider.classList.remove("dragging");
+    container.addEventListener("mouseleave", () => {
+        if (isDown) {
+            isDown = false;
+            isInteracting = false;
+        }
     });
 
-    slider.addEventListener("mousemove", (e) => {
+    container.addEventListener("mousemove", (e) => {
         if (!isDown) return;
         e.preventDefault();
-        const x = e.pageX - slider.offsetLeft;
-        const walk = (x - startX) * 2; // Velocidad de arrastre
-        slider.scrollLeft = scrollLeft - walk;
+        const x = e.pageX - container.offsetLeft;
+        const walk = (x - startX) * 2;
+        container.scrollLeft = scrollLeftPos - walk;
+        verificarResetLoop();
     });
+
+    // 5. Arrastre en Móviles (Táctil)
+    container.addEventListener("touchstart", () => {
+        isInteracting = true;
+    }, { passive: true });
+
+    container.addEventListener("touchend", () => {
+        setTimeout(() => { isInteracting = false; }, 1500);
+    }, { passive: true });
+
+    container.addEventListener("scroll", () => {
+        verificarResetLoop();
+    }, { passive: true });
 });
