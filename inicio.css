@@ -219,6 +219,89 @@ h2::after {
     border: 0;
     border-radius: 8px;
 }
+/* Estilos para la sección de Certificaciones */
+.seccion-certificaciones {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #f9f8f4;
+    overflow: hidden;
+}
+
+.seccion-certificaciones h2 {
+    color: #4a2c11;
+    font-size: 2rem;
+    margin-bottom: 5px;
+}
+
+.subtitulo-certificaciones {
+    color: #666;
+    font-size: 0.95rem;
+    margin-bottom: 30px;
+}
+
+/* Contenedor principal del carrusel con efecto de desvanecimiento lateral */
+.carrusel-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    white-space: nowrap;
+    mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+}
+
+/* Pista animada que se desplaza continuamente */
+.carrusel-track {
+    display: flex;
+    gap: 40px;
+    width: max-content;
+    animation: carrusel-infinito 15s linear infinite;
+}
+
+/* Pausar la animación cuando el usuario pone el cursor encima */
+.carrusel-container:hover .carrusel-track {
+    animation-play-state: paused;
+}
+
+/* Elementos individuales (Logo + Texto) */
+.carrusel-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 160px;
+    padding: 15px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.carrusel-item:hover {
+    transform: translateY(-5px);
+}
+
+.carrusel-item img {
+    height: 70px;
+    width: auto;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+
+.carrusel-item span {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Animación CSS con Keyframes */
+@keyframes carrusel-infinito {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
 
 /* ADAPTACIÓN PARA TELÉFONOS / PANTALLAS PEQUEÑAS */
 @media (max-width: 850px) {
@@ -227,4 +310,5 @@ h2::after {
         gap: 3rem;
     }
 }
-/* Seccion Principal de Contacto y Ubicacion */
+
+
