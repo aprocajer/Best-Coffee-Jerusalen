@@ -119,3 +119,12 @@ function mostrarMenuUsuario(usuario) {
         `);
     }
 }
+
+const navToggle = document.querySelector(".nav-toggle"); // O la clase de tu icono ☰
+const navLinks = document.querySelector(".nav-links");
+
+if (navToggle && navLinks) {
+    navToggle.addEventListener("click", () => {
+        navLinks.classList.toggle("nav-menu_visible");
+    });
+}
