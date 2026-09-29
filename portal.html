@@ -382,44 +382,46 @@
         }
 
         // Función que registra el lote y renderiza el QR con la URL del comprador (index.html)
-        function generarLoteYQR(e) {
-            e.preventDefault();
+        async function generarLoteYQR(e) {
+    e.preventDefault();
 
-            const nuevoLote = {
-                codigo: document.getElementById('nuevo-codigo').value,
-                origen: document.getElementById('nuevo-origen').value,
-                fechaProduccion: document.getElementById('nueva-fecha').value,
-                productor: document.getElementById('nuevo-productor').value,
-                descripcion: document.getElementById('nueva-descripcion').value
-            };
+    const nuevoLote = {
+        codigo: document.getElementById('nuevo-codigo').value,
+        origen: document.getElementById('nuevo-origen').value,
+        fechaProduccion: document.getElementById('nueva-fecha').value,
+        productor: document.getElementById('nuevo-productor').value,
+        descripcion: document.getElementById('nueva-descripcion').value
+    };
 
-            // 1. Guardar localmente en el navegador para simular la actualización de la base de datos
-            let lotesExistentes = JSON.parse(localStorage.getItem('lotes_aprocajer')) || [];
-            lotesExistentes.push(nuevoLote);
-            localStorage.setItem('lotes_aprocajer', JSON.stringify(lotesExistentes));
+    // URL limpia de la página donde el comprador debe ingresar el código
+    const urlPaginaComprador = "https://aprocajer.com/index.html"; 
 
-            // 2. Construir la URL exacta que abrirá el comprador en index.html al escanear
-            const urlBase = window.location.origin + window.location.pathname.replace('portal.html', 'index.html');
-            const urlComprador = `${urlBase}?codigo=${nuevoLote.codigo}`;
+    // Renderizar el código QR que redirige únicamente a la página de consulta
+    const contenedorQR = document.getElementById('contenedor-qr');
+    const qrCanvas = document.getElementById('qr-canvas');
+    qrCanvas.innerHTML = ""; 
 
-            // 3. Generar la imagen del QR
-            const contenedorQR = document.getElementById('contenedor-qr');
-            const qrCanvas = document.getElementById('qr-canvas');
-            qrCanvas.innerHTML = ""; // Limpiar previo
+    new QRCode(qrCanvas, {
+        text: urlPaginaComprador,
+        width: 200,
+        height: 200,
+        colorDark: "#5c3d2e",
+        colorLight: "#ffffff"
+    });
 
-            new QRCode(qrCanvas, {
-                text: urlComprador,
-                width: 200,
-                height: 200,
-                colorDark: "#5c3d2e",
-                colorLight: "#ffffff"
-            });
-
-            document.getElementById('texto-url-qr').textContent = `URL del QR: ${urlComprador}`;
-            contenedorQR.style.display = 'flex';
-
-            alert(`El lote ${nuevoLote.codigo} ha sido generado. Ahora la página principal (index.html) responderá a este código.`);
-        }
+    // Mostrar el QR y la clave que debes enviarle al comprador
+    document.getElementById('texto-url-qr').innerHTML = `
+        <div style="margin-top:15px; padding:10px; background:#fff3cd; border:1px solid #ffeeba; border-radius:5px;">
+            <p style="margin:0; font-size:1.1rem; color:#856404;">
+                <strong>Código Único para el Comprador:</strong> 
+                <span style="font-size:1.3rem; font-weight:bold; color:#5c3d2e;">${nuevoLote.codigo}</span>
+            </p>
+            <small style="color:#6c757d;">Proporcione este código al comprador. Al escanear el QR, el portal le pedirá introducirlo.</small>
+        </div>
+    `;
+    
+    contenedorQR.style.display = 'flex';
+}
     </script>
 </body>
 </html>
