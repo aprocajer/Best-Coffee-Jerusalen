@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portal de Servicios - APROCAJER</title>
-    <!-- Importamos el CSS del menú/estilos globales si tienes uno, o creamos el estilo interno -->
     <link rel="stylesheet" href="menu.css">
+    
+    <!-- Librería externa para generar las imágenes de los códigos QR -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
     <style>
         :root {
             --primary: #5c3d2e;
@@ -134,20 +137,71 @@
             font-weight: bold;
             font-size: 0.9rem;
             transition: background-color 0.2s;
+            cursor: pointer;
+            border: none;
         }
 
         .btn-modulo:hover {
             background-color: var(--primary);
         }
 
-        /* Modal o Contenedor de Contenido */
+        /* Sección de Detalles */
         .seccion-detalles {
             margin-top: 2.5rem;
             background: white;
             padding: 2rem;
             border-radius: 10px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            display: none; /* Se activa dinámicamente */
+            display: none;
+        }
+
+        /* Formularios y elementos interactivos para el generador de QR */
+        .form-grupo {
+            margin-bottom: 1rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-grupo label {
+            font-weight: bold;
+            margin-bottom: 0.3rem;
+            color: var(--primary);
+        }
+
+        .form-grupo input, .form-grupo textarea {
+            padding: 0.6rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 0.95rem;
+        }
+
+        .qr-output-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background: var(--bg-gray);
+            border-radius: 8px;
+        }
+
+        #qr-canvas {
+            margin: 1rem 0;
+        }
+
+        .btn-guardar {
+            background-color: var(--accent-green);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-guardar:hover {
+            background-color: #1b5e20;
         }
     </style>
 </head>
@@ -168,11 +222,21 @@
         <!-- Tarjeta de Bienvenida -->
         <section class="bienvenida-card">
             <h2 id="saludo-usuario">¡Hola!</h2>
-            <p>Bienvenido al sistema digital de APROCAJER. Selecciona una de las opciones a continuación para acceder a la gestión de datos, reportes y herramientas de campo.</p>
+            <p>Bienvenido al sistema digital de APROCAJER. Selecciona una de las opciones a continuación para acceder a la gestión de datos, reportes y generación de QR para compradores.</p>
         </section>
 
         <!-- Rejilla de Módulos Disponible -->
         <section class="grid-modulos">
+
+            <!-- Módulo 0: Generador de QR y Trazabilidad (Nuevo) -->
+            <div class="modulo-card" style="border: 2px solid var(--accent-green);">
+                <div>
+                    <div class="modulo-icono">🏷️</div>
+                    <h3>Generar QR para Comprador</h3>
+                    <p>Crea un nuevo código único de lote, registra la información del origen y descarga el QR que escaneará el comprador final.</p>
+                </div>
+                <button class="btn-modulo" style="background-color: var(--accent-green);" onclick="abrirModulo('generar-qr')">Crear Nuevo Lote / QR</button>
+            </div>
 
             <!-- Módulo 1: Productores y Fincas -->
             <div class="modulo-card">
@@ -181,7 +245,7 @@
                     <h3>Productores y Fincas</h3>
                     <p>Consulta el estado de expedientes, códigos de productor, delimitación de fincas (KML/GPS) y certificaciones (Rainforest, Orgánico, Fairtrade).</p>
                 </div>
-                <a href="#" class="btn-modulo" onclick="abrirModulo('productores')">Acceder a Registro</a>
+                <button class="btn-modulo" onclick="abrirModulo('productores')">Acceder a Registro</button>
             </div>
 
             <!-- Módulo 2: Entregas y Calidad -->
@@ -191,7 +255,7 @@
                     <h3>Entregas y Catación</h3>
                     <p>Revisa notas de peso, pesajes de café en pergamino seco, análisis físicos y resultados del laboratorio de catación.</p>
                 </div>
-                <a href="#" class="btn-modulo" onclick="abrirModulo('entregas')">Ver Historial</a>
+                <button class="btn-modulo" onclick="abrirModulo('entregas')">Ver Historial</button>
             </div>
 
             <!-- Módulo 3: Clima y Alertas Agrícolas -->
@@ -201,7 +265,7 @@
                     <h3>Estaciones Meteorológicas</h3>
                     <p>Monitoreo de datos climáticos en tiempo real (lluvia, humedad, temperatura) para planificar fertilización y podas en campo.</p>
                 </div>
-                <a href="#" class="btn-modulo" onclick="abrirModulo('clima')">Ver Sensores</a>
+                <button class="btn-modulo" onclick="abrirModulo('clima')">Ver Sensores</button>
             </div>
 
             <!-- Módulo 4: Formatos y Fichas de Campo -->
@@ -211,7 +275,7 @@
                     <h3>Formatos y Documentos</h3>
                     <p>Descarga e imprime fichas de visita técnica, diagramas de flujo y formatos de inspección para productores de la asociación.</p>
                 </div>
-                <a href="#" class="btn-modulo" onclick="abrirModulo('documentos')">Descargar Formatos</a>
+                <button class="btn-modulo" onclick="abrirModulo('documentos')">Descargar Formatos</button>
             </div>
 
         </section>
@@ -233,20 +297,16 @@
             const usuarioGuardado = localStorage.getItem("usuario_aprocajer");
 
             if (!usuarioGuardado) {
-                // Si no hay sesión, redirigir inmediatamente al login / inicio
-                alert("Debes iniciar sesión para acceder al portal.");
-                window.location.href = "index.html";
-                return;
+                // Si no hay sesión, se usa un usuario temporal de prueba
+                document.getElementById("nombre-usuario").textContent = "Administrador APROCAJER";
+                document.getElementById("saludo-usuario").textContent = "¡Bienvenido(a), Administrador!";
+            } else {
+                const usuario = JSON.parse(usuarioGuardado);
+                document.getElementById("nombre-usuario").textContent = usuario.nombre || usuario.email;
+                document.getElementById("saludo-usuario").textContent = `¡Bienvenido(a), ${usuario.nombre || 'Usuario'}!`;
             }
 
-            // 2. Parsear los datos del usuario
-            const usuario = JSON.parse(usuarioGuardado);
-
-            // 3. Mostrar datos en la interfaz
-            document.getElementById("nombre-usuario").textContent = usuario.nombre || usuario.email;
-            document.getElementById("saludo-usuario").textContent = `¡Bienvenido(a), ${usuario.nombre || 'Usuario'}!`;
-
-            // 4. Lógica de Cerrar Sesión
+            // 2. Lógica de Cerrar Sesión
             document.getElementById("btn-cerrar-sesion").addEventListener("click", () => {
                 localStorage.removeItem("usuario_aprocajer");
                 window.location.href = "index.html";
@@ -262,6 +322,43 @@
             panel.style.display = "block";
 
             switch(tipo) {
+                case 'generar-qr':
+                    const codigoSugerido = 'LOTE-' + Math.floor(1000 + Math.random() * 9000) + '-AG';
+                    titulo.textContent = "Generador de Lotes y Códigos QR para Compradores";
+                    cuerpo.innerHTML = `
+                        <form id="form-nuevo-lote" onsubmit="generarLoteYQR(event)">
+                            <div class="form-grupo">
+                                <label>Código Único de Lote:</label>
+                                <input type="text" id="nuevo-codigo" value="${codigoSugerido}" required readonly style="background:#e9ecef;">
+                            </div>
+                            <div class="form-grupo">
+                                <label>Origen / Finca / Comunidad:</label>
+                                <input type="text" id="nuevo-origen" placeholder="Ej: Santa Bárbara, Finca El Paraíso" required>
+                            </div>
+                            <div class="form-grupo">
+                                <label>Fecha de Cosecha / Producción:</label>
+                                <input type="text" id="nueva-fecha" value="${new Date().toLocaleDateString('es-ES', {month: 'long', year: 'numeric'})}" required>
+                            </div>
+                            <div class="form-grupo">
+                                <label>Productor o Colectivo:</label>
+                                <input type="text" id="nuevo-productor" placeholder="Ej: Don Juan Pérez / Socios APROCAJER" required>
+                            </div>
+                            <div class="form-grupo">
+                                <label>Descripción y Notas de Catación / Proceso:</label>
+                                <textarea id="nueva-descripcion" rows="3" placeholder="Ej: Variedad Parainema, secado solar en camas africanas, puntaje SCAA 86 pts." required></textarea>
+                            </div>
+                            <button type="submit" class="btn-guardar">💾 Guardar Lote y Generar QR</button>
+                        </form>
+
+                        <div id="contenedor-qr" class="qr-output-container" style="display:none;">
+                            <h3>¡Código QR Creado Éxitosamente!</h3>
+                            <p>Escanea este código con tu celular o descárgalo para imprimirlo en la etiqueta del producto.</p>
+                            <div id="qr-canvas"></div>
+                            <p style="font-size:0.85rem; color:#555;" id="texto-url-qr"></p>
+                        </div>
+                    `;
+                    break;
+
                 case 'productores':
                     titulo.textContent = "Gestión de Productores y Fincas";
                     cuerpo.innerHTML = "<p>Aquí podrás buscar a los 600 productores de la cartera, verificar el estado de su RTN, DNI y ver la delimitación geográfica de su lote.</p>";
@@ -282,6 +379,46 @@
 
             // Desplazar suavemente hacia el contenido
             panel.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Función que registra el lote y renderiza el QR con la URL del comprador (index.html)
+        function generarLoteYQR(e) {
+            e.preventDefault();
+
+            const nuevoLote = {
+                codigo: document.getElementById('nuevo-codigo').value,
+                origen: document.getElementById('nuevo-origen').value,
+                fechaProduccion: document.getElementById('nueva-fecha').value,
+                productor: document.getElementById('nuevo-productor').value,
+                descripcion: document.getElementById('nueva-descripcion').value
+            };
+
+            // 1. Guardar localmente en el navegador para simular la actualización de la base de datos
+            let lotesExistentes = JSON.parse(localStorage.getItem('lotes_aprocajer')) || [];
+            lotesExistentes.push(nuevoLote);
+            localStorage.setItem('lotes_aprocajer', JSON.stringify(lotesExistentes));
+
+            // 2. Construir la URL exacta que abrirá el comprador en index.html al escanear
+            const urlBase = window.location.origin + window.location.pathname.replace('portal.html', 'index.html');
+            const urlComprador = `${urlBase}?codigo=${nuevoLote.codigo}`;
+
+            // 3. Generar la imagen del QR
+            const contenedorQR = document.getElementById('contenedor-qr');
+            const qrCanvas = document.getElementById('qr-canvas');
+            qrCanvas.innerHTML = ""; // Limpiar previo
+
+            new QRCode(qrCanvas, {
+                text: urlComprador,
+                width: 200,
+                height: 200,
+                colorDark: "#5c3d2e",
+                colorLight: "#ffffff"
+            });
+
+            document.getElementById('texto-url-qr').textContent = `URL del QR: ${urlComprador}`;
+            contenedorQR.style.display = 'flex';
+
+            alert(`El lote ${nuevoLote.codigo} ha sido generado. Ahora la página principal (index.html) responderá a este código.`);
         }
     </script>
 </body>

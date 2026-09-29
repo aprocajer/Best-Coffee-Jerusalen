@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escanear QR - Mi App</title>
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Librería para escanear QR con la cámara -->
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+</head>
+<body>
+
+    <main class="scanner-container">
+        <h1>Escanea tu Código QR</h1>
+        
+        <!-- El video de la cámara se cargará en este div -->
+        <div id="reader" style="width: 100%; max-width: 500px; margin: 0 auto;"></div>
+        
+        <div id="resultado" class="result-box"></div>
+    </main>
+
+    <script>
+        function onScanSuccess(decodedText, decodedResult) {
+            // Cuando se escanea un código con éxito
+            console.log(`Código escaneado: ${decodedText}`);
+            document.getElementById('resultado').innerText = `Redirigiendo a: ${decodedText}`;
+            
+            // Redirige al enlace escaneado
+            window.location.href = decodedText;
+        }
+
+        // Inicializar el escáner
+        let html5QrcodeScanner = new Html5QrcodeScanner(
+            "reader", 
+            { fps: 10, qrbox: { width: 250, height: 250 } },
+            /* verbose= */ false
+        );
+        html5QrcodeScanner.render(onScanSuccess);
+    </script>
+</body>
+</html>

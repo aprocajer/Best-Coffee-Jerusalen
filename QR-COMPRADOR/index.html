@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiMarca | Trazabilidad y Origen de Lotes</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="src/assets/icons/favicon.ico" type="image/x-icon">
+
+    <!-- Hojas de estilo CSS -->
+    <link rel="stylesheet" href="src/css/styles.css">
+    <link rel="stylesheet" href="src/css/trazabilidad.css">
+</head>
+<body>
+
+    <!-- Encabezado y Navegación Principal -->
+    <header class="main-header">
+        <nav class="navbar">
+            <a href="index.html" class="logo">MiMarca</a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Inicio</a></li>
+                <li><a href="trazabilidad.html">Verificar Lote</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Sección Principal / Hero con Buscador Directo -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1>Garantía de Origen y Calidad</h1>
+                <p>Escanea el código QR de tu empaque o ingresa tu código único para conocer la historia, finca y proceso de producción de tu lote.</p>
+                
+                <!-- Buscador de Lote en la portada -->
+                <form id="form-trazabilidad" class="code-form hero-search">
+                    <input 
+                        type="text" 
+                        id="codigo-lote" 
+                        placeholder="Ingresa tu código (Ej: LOTE-8492-AG)" 
+                        required
+                        autocomplete="off"
+                    >
+                    <button type="submit">Buscar Lote</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Tarjeta donde se cargan los resultados en el mismo Inicio -->
+        <section class="container">
+            <!-- Mensaje de error si no existe el lote -->
+            <div id="mensaje-error" class="error-box hidden">
+                El código ingresado no existe o es inválido. Revisa tu etiqueta e inténtalo nuevamente.
+            </div>
+
+            <!-- Ficha de Información del Lote -->
+            <article id="resultado-lote" class="lote-info-card hidden">
+                <h2 id="lote-titulo">Ficha de Trazabilidad</h2>
+                
+                <div class="lote-grid">
+                    <div class="info-item">
+                        <span>Código de Lote:</span>
+                        <strong id="info-codigo">-</strong>
+                    </div>
+                    <div class="info-item">
+                        <span>Lugar de Origen / Finca:</span>
+                        <strong id="info-origen">-</strong>
+                    </div>
+                    <div class="info-item">
+                        <span>Fecha de Cosecha / Producción:</span>
+                        <strong id="info-fecha">-</strong>
+                    </div>
+                    <div class="info-item">
+                        <span>Productor / Agricultor:</span>
+                        <strong id="info-productor">-</strong>
+                    </div>
+                </div>
+
+                <div class="lote-historia">
+                    <h3>Historia y Detalles del Lote</h3>
+                    <p id="info-descripcion">Cargando información del lote...</p>
+                </div>
+            </article>
+        </section>
+
+        <!-- Sección de Características / ¿Cómo funciona? -->
+        <section class="features-section container">
+            <h2>¿Cómo funciona nuestro sistema de trazabilidad?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-number">1</div>
+                    <h3>Escanea el QR</h3>
+                    <p>Usa la cámara de tu celular para escanear el código en la etiqueta de tu producto.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-number">2</div>
+                    <h3>Ingresa el Código</h3>
+                    <p>Introduce la clave única de tu lote si no se detecta automáticamente.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-number">3</div>
+                    <h3>Conoce el Origen</h3>
+                    <p>Descubre la ubicación exacta, el agricultor a cargo y la fecha de cosecha.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Pie de página -->
+    <footer class="main-footer">
+        <p>&copy; 2026 MiMarca. Transparencia y trazabilidad garantizada.</p>
+    </footer>
+
+    <!-- Script de Trazabilidad para buscar en el JSON -->
+    <script src="src/js/trazabilidad.js"></script>
+    <!-- Carga de scripts al final del body -->
+    <script src="src/js/main.js"></script>
+    <script src="src/js/trazabilidad.js"></script>
+</body>
+</html>

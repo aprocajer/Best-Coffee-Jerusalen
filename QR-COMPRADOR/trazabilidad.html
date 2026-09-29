@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escanear Lote | MiMarca</title>
+    <link rel="stylesheet" href="src/css/styles.css">
+    <link rel="stylesheet" href="src/css/trazabilidad.css">
+</head>
+<body>
+    <header class="main-header">
+    <nav class="navbar">
+        <!-- El Logo te lleva al Inicio al hacer clic -->
+        <a href="index.html" class="logo">MiMarca</a>
+
+        <ul class="nav-links">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="trazabilidad.html">Verificar Lote</a></li>
+        </ul>
+    </nav>
+    <main class="container">
+        <h1>Escanea tu Código QR</h1>
+        
+        <!-- Botones de control para la cámara -->
+        <div style="text-align: center; margin-bottom: 1rem;">
+            <button type="button" onclick="iniciarEscanerQR('lector-qr')">
+                📷 Abrir Cámara
+            </button>
+            <button type="button" onclick="detenerEscanerQR()">
+                ❌ Cerrar Cámara
+            </button>
+        </div>
+
+        <!-- El visor de la cámara se cargará dentro de este DIV -->
+        <div id="lector-qr" style="max-width: 500px; margin: 0 auto;"></div>
+
+        <!-- Formulario alternativo manual -->
+        <form id="form-trazabilidad" class="code-form" style="margin-top: 2rem;">
+            <input type="text" id="codigo-lote" placeholder="O ingresa el código manual" required>
+            <button type="submit">Buscar</button>
+        </form>
+        <article id="resultado-lote" class="lote-info-card hidden">
+    <h2 id="lote-titulo">Ficha de Trazabilidad</h2>
+    
+    <!-- ... (Tus datos del lote aquí) ... -->
+
+    <!-- Botón para regresar al inicio -->
+    <div style="margin-top: 2rem; text-align: center;">
+        <a href="index.html" class="btn-volver">← Volver al Inicio</a>
+    </div>
+</article>
+
+        <!-- Resultados -->
+        <div id="mensaje-error" class="error-box hidden">Código no encontrado.</div>
+        <article id="resultado-lote" class="lote-info-card hidden">
+            <h2 id="info-codigo">-</h2>
+            <p id="info-origen">-</p>
+            <p id="info-fecha">-</p>
+            <p id="info-productor">-</p>
+            <p id="info-descripcion">-</p>
+        </article>
+    </main>
+
+    <!-- 1. Librería externa para procesamiento de cámara y QR -->
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+
+    <!-- 2. Tus scripts locales -->
+    <script src="src/js/main.js"></script>
+    <script src="src/js/trazabilidad.js"></script>
+    <script src="src/js/qr-scanner.js"></script>
+    </header>
+</body>
+</html>

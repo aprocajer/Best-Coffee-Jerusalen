@@ -1,0 +1,302 @@
+/* Secciones Generales */
+section {
+    padding: 3rem 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h1, h2, h3 {
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+h2 {
+    text-align: center;
+    font-size: 2rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+h2::after {
+    content: '';
+    width: 60px;
+    height: 3px;
+    background-color: var(--secondary-color);
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Sección Bienvenida / Hero */
+.bienvenida {
+    text-align: center;
+    background: linear-gradient(rgba(74, 44, 42, 0.7), rgba(74, 44, 42, 0.7)), url('../procesos.jpg') center/cover no-repeat;
+    color: var(--text-light);
+    padding: 5rem 1rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+}
+
+.bienvenida h1 {
+    color: var(--text-light);
+    font-size: 2.5rem;
+}
+
+.bienvenida p {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.7rem 1.5rem;
+    margin: 0.3rem;
+    background-color: var(--secondary-color);
+    color: var(--text-light);
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.btn:hover {
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+}
+
+/* Misión y Visión */
+.mision-vision > div {
+    background: #fdfbf7;
+    border-left: 4px solid var(--secondary-color);
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 0 8px 8px 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+/* Grilla de Procesos / Productos */
+.producto-lista {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.producto {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    text-align: center;
+    padding-bottom: 1rem;
+}
+
+.producto img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.producto h3 {
+    margin-top: 1rem;
+}
+
+/* Alianzas y Convenios */
+.alianzas, .convenios {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.alianzas img, .convenios img {
+    max-width: 100%;
+    object-fit: contain;
+    margin: 0.5rem;
+    border-radius: 6px;
+}
+
+/* Grilla de Noticias */
+.noticias {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.noticia {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.noticia img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+/* Contenedor principal para centrar la sección */
+.seccion-contacto-ubicacion {
+    width: 100%;
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 0 1.5rem;
+    box-sizing: border-box;
+}
+
+/* Rejilla de 2 columnas */
+.contenedor-dos-columnas {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 50% para el formulario, 50% para el mapa */
+    gap: 2.5rem; /* Espacio horizontal entre las dos columnas */
+    align-items: start;
+}
+
+/* Títulos y líneas decorativas */
+.columna-bloque h2 {
+    color: #a67c37;
+    text-align: center;
+    font-size: 2rem;
+    margin-top: 0;
+    margin-bottom: 0.3rem;
+}
+
+.linea-decorativa {
+    width: 60px;
+    height: 4px;
+    background-color: #a67c37;
+    margin: 0 auto 1.5rem auto;
+    border-radius: 2px;
+}
+
+/* Estilos del Formulario */
+#form-contacto {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+#form-contacto input,
+#form-contacto textarea {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+#form-contacto button {
+    background-color: #a67c37;
+    color: white;
+    border: none;
+    padding: 0.9rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#form-contacto button:hover {
+    background-color: #8b5a2b;
+}
+
+/* Ajustes del Mapa e Iframe */
+.mapa {
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.mapa iframe {
+    width: 100% !important;
+    height: 380px !important; /* Altura para igualar visualmente el tamaño del formulario */
+    border: 0;
+    border-radius: 8px;
+}
+/* Estilos para la sección de Certificaciones y Contenedor principal con soporte de scroll manual */
+.seccion-certificaciones {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #f9f8f4;
+    overflow: hidden;
+}
+
+.seccion-certificaciones h2 {
+    color: #4a2c11;
+    font-size: 2rem;
+    margin-bottom: 5px;
+}
+
+.subtitulo-certificaciones {
+    color: #666;
+    font-size: 0.95rem;
+    margin-bottom: 25px;
+}
+
+/* Contenedor interactivo con scroll */
+.carrusel-container {
+    width: 100%;
+    overflow-x: auto;
+    position: relative;
+    padding: 15px 0;
+    scrollbar-width: none; /* Oculta scrollbar en Firefox */
+    -ms-overflow-style: none; /* Oculta scrollbar en IE/Edge */
+    cursor: grab;
+    user-select: none;
+}
+
+.carrusel-container::-webkit-scrollbar {
+    display: none; /* Oculta scrollbar en Chrome/Safari */
+}
+
+.carrusel-container:active {
+    cursor: grabbing;
+}
+
+.carrusel-track {
+    display: flex;
+    gap: 30px;
+    width: max-content;
+}
+
+.carrusel-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 160px;
+    padding: 15px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    flex-shrink: 0;
+}
+
+.carrusel-item img {
+    height: 65px;
+    width: auto;
+    object-fit: contain;
+    margin-bottom: 8px;
+    pointer-events: none;
+}
+
+.carrusel-item span {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #333;
+}
+/* ADAPTACIÓN PARA TELÉFONOS / PANTALLAS PEQUEÑAS */
+@media (max-width: 850px) {
+    .contenedor-dos-columnas {
+        grid-template-columns: 1fr; /* Pasa automáticamente a 1 columna en celulares */
+        gap: 3rem;
+    }
+}
+
+

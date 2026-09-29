@@ -1,0 +1,260 @@
+:root {
+    --primary-color: #8e5801d3;    /* Cafe Claro*/
+    --secondary-color: #8B5A2B;  /* Café medio / Bronce */
+    --accent-color: #D4A373;     /* Dorado/Crema café */
+    --bg-light: #FAEDCD;         /* Crema claro */
+    --text-dark: #1f930a;
+    --text-light: #FFFFFF;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+/* Header & Navbar */
+header {
+    background-color: var(--primary-color);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+}
+
+.menu-navegar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Control del Logo */
+.img-nav-logo {
+    height: 80px; /* Altura fija adecuada para PC */
+    width: auto;
+    display: block;
+}
+
+/* Menú de Enlaces horizontal */
+.menu-links {
+    display: flex;
+    flex-direction: row; /* Alinea los enlaces de lado a lado */
+    list-style: none;
+    gap: 1.8rem;
+    margin: 0;
+    padding: 0;
+}
+.menu-links a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+}
+
+.menu-links a:hover {
+    color: #D4A373; /* Efecto hover al pasar el cursor */
+}
+
+/* Botones Nav */
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.btn-login {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+.btn-login {
+    background: transparent;
+    color: var(--text-light);
+    border: 1px solid var(--accent-color);
+}
+
+.btn-login:hover {
+    background: var(--accent-color);
+    color: var(--primary-color);
+}
+
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text-light);
+    font-size: 1.8rem;
+    cursor: pointer;
+}
+
+/* Footer */
+footer {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    text-align: center;
+    padding: 2rem 1rem 1rem;
+    margin-top: 3rem;
+}
+
+.redes-sociales {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    margin: 1rem 0;
+}
+.redes-sociales img {
+    /* filter: brightness(0) invert(1); <-- Elimina esta línea */
+    transition: transform 0.2s;
+}
+
+.redes-sociales img:hover {
+    transform: scale(1.15);
+}
+
+/* Estilos para el Modal de Login */
+.modal-login {
+    display: none; 
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    justify-content: center;
+    align-items: center;
+}
+
+.contenido-modal {
+    background-color: #ffffff;
+    padding: 2.5rem 2rem;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.cerrar-modal {
+    position: absolute;
+    right: 18px;
+    top: 12px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #666;
+    transition: color 0.2s;
+}
+
+.cerrar-modal:hover {
+    color: #111;
+}
+
+.contenido-modal h2 {
+    margin-top: 0;
+    margin-bottom: 0.3rem;
+    color: #5c3d2e;
+    font-size: 1.6rem;
+    text-align: center;
+}
+
+.subtitulo-modal {
+    font-size: 0.85rem;
+    color: #666;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.campo {
+    margin-bottom: 1.2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.campo label {
+    font-size: 0.88rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    color: #333;
+}
+
+.campo input {
+    padding: 0.7rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    transition: border-color 0.2s;
+}
+
+.campo input:focus {
+    outline: none;
+    border-color: #5c3d2e;
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: #8b5a2b;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-submit:hover {
+    background-color: #5c3d2e;
+}
+
+.mensaje-login {
+    margin-top: 1rem;
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+/* Responsivo para menú móvil */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .menu-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: var(--primary-color);
+        flex-direction: column;
+        padding: 1rem 0;
+        text-align: center;
+    }
+
+    .menu-links.active {
+        display: flex !important;
+    }
+}
