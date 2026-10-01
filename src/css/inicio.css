@@ -291,6 +291,12 @@ h2::after {
     font-weight: 600;
     color: #333;
 }
+
+.dejanosComentario {
+    text-align: center;
+    margin-top: 2rem;
+}
+
 /* ADAPTACIÓN PARA TELÉFONOS / PANTALLAS PEQUEÑAS */
 @media (max-width: 850px) {
     .contenedor-dos-columnas {

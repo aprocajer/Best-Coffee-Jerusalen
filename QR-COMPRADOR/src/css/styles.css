@@ -157,6 +157,22 @@ a {
     font-size: 0.95rem;
 }
 
+.dajarComentario {
+    text-align: center;
+    margin-top: 2rem;
+    border: 1px solid var(--primary-color);
+    padding: 1.5rem;
+    p {
+        margin-bottom: 1rem;
+    }
+}
+.dejanosComentario {
+    text-align: center;
+    margin-top: 2rem;
+    border: 1px solid var(--primary-color);
+    padding: 1.5rem;
+}
+
 /* ==========================================
    PIE DE PÁGINA
    ========================================== */
