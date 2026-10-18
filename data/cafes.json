@@ -1,0 +1,98 @@
+[
+ {
+  "variedad": "Café HG",
+  "etiqueta": "Café de especialidad",
+  "sca": "80 - 83",
+  "sca_max": 83,
+  "lema": "",
+  "datos": [
+   [
+    "Procesos",
+    "Lavado, honey y natural"
+   ],
+   [
+    "Variedades",
+    "Geisha, Parainema, IHCAFE 90, Lempira, Obata, Catuaí"
+   ],
+   [
+    "Formato",
+    "SCAA / preparación europea, americana y especial"
+   ]
+  ],
+  "descripcion": "Cafés de especialidad con puntajes de 80 a 83 puntos, según el formato de la SCAA.",
+  "notas": [
+   "Floral",
+   "Frutal",
+   "Chocolate",
+   "Azúcar morena",
+   "Frutas tropicales",
+   "Especias marrones"
+  ],
+  "certs": [],
+  "org": false
+ },
+ {
+  "variedad": "Café SHG",
+  "etiqueta": "Café de especialidad",
+  "sca": "83 - 85",
+  "sca_max": 85,
+  "lema": "",
+  "datos": [
+   [
+    "Procesos",
+    "Lavado, honey y natural"
+   ],
+   [
+    "Variedades",
+    "Geisha, Parainema, IHCAFE 90, Lempira, Obata, Catuaí"
+   ],
+   [
+    "Formato",
+    "SCAA / preparación europea, americana y especial"
+   ]
+  ],
+  "descripcion": "Cafés de especialidad con puntajes de 83 a 85 puntos, según el formato de la SCAA.",
+  "notas": [
+   "Floral",
+   "Frutal",
+   "Chocolate",
+   "Azúcar morena",
+   "Frutas tropicales",
+   "Especias marrones"
+  ],
+  "certs": [],
+  "org": false
+ },
+ {
+  "variedad": "Microlotes",
+  "etiqueta": "Café de especialidad",
+  "sca": "85 - 90",
+  "sca_max": 90,
+  "lema": "",
+  "datos": [
+   [
+    "Procesos",
+    "Lavado, honey y natural"
+   ],
+   [
+    "Variedades",
+    "Geisha, Parainema, IHCAFE 90, Lempira, Obata, Catuaí"
+   ],
+   [
+    "Formato",
+    "SCAA / preparación europea, americana y especial"
+   ]
+  ],
+  "descripcion": "Lotes seleccionados con puntajes de 85 a 90 puntos. Cantidades según la cosecha.",
+  "notas": [
+   "Floral",
+   "Frutal",
+   "Chocolate",
+   "Azúcar morena",
+   "Frutas tropicales",
+   "Especias marrones"
+  ],
+  "certs": [],
+  "org": false
+ }
+]
